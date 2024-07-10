@@ -1,5 +1,5 @@
-import getForecast from "./get-forecast.js";
+import getWeather from "./get-weather.js";
 
 const city = "london";
-const weather = await getForecast(city);
+const weather = await getWeather(city);
 console.log(weather);

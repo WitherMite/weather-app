@@ -1,15 +1,14 @@
-export default async function getForecast(locationSearch) {
-  const request = await requestWeather(locationSearch);
+export default async function getWeather(locationSearch) {
+  const request = await requestForecast(locationSearch);
   console.log(request);
   const current = reduceCurrentWeather(request.current);
   const location = reduceLocation(request.location);
   const forecast = request.forecast.forecastday.map(reduceForecastDay);
 
-  const weather = { current, forecast, location };
-  return weather;
+  return { current, forecast, location };
 }
 
-async function requestWeather(location) {
+async function requestForecast(location) {
   const link =
     "http://api.weatherapi.com/v1/forecast.json?key=2965c6b027c24232bdd203628240707&days=3";
   const search = "&q=" + location;
@@ -22,6 +21,8 @@ async function requestWeather(location) {
     console.log(e);
   }
 }
+
+// TODO: pass through needed properties after designing webpage
 
 function reduceForecastDay(day) {}
 
