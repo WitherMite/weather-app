@@ -1,4 +1,10 @@
-export default async function getWeather(locationSearch) {
+const units = ["us", "metric", "uk", "base"];
+let currentUnit = units[0];
+
+export default async function getWeather(locationSearch, unitIndex) {
+  if (typeof unitIndex === "number" && unitIndex >= 0 && unitIndex < 4) {
+    currentUnit = units[unitIndex];
+  }
   const request = await requestForecast(locationSearch);
   console.log(request);
 
@@ -6,13 +12,11 @@ export default async function getWeather(locationSearch) {
   const current = reduceCurrentWeather(request.currentConditions);
   const forecast = request.days.map(reduceDay);
 
-  // reduce request to needed properties
-
   return { current, forecast, location };
 }
 
 async function requestForecast(location) {
-  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&include=current`;
+  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&unitGroup=${currentUnit}&include=current`;
 
   try {
     const weather = await fetch(url).then((response) => response.json());

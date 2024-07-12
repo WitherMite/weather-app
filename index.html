@@ -7,8 +7,12 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <form action="">
-      <div><label for="">Location:</label><input type="text" /></div>
+    <form novalidate>
+      <div>
+        <label for="location">Location:</label
+        ><input type="text" id="location" />
+      </div>
+      <button type="submit">Get Forecast</button>
     </form>
     <div class="forecast-container"></div>
     <script type="module" src="./index.js"></script>
