@@ -25,7 +25,25 @@
       </div>
       <button type="submit">Get Forecast</button>
     </form>
-    <div class="forecast-container"></div>
+
+    <main class="weather-container">
+      <h1 class="location">Place goes here</h1>
+
+      <div class="selected-weather">
+        <!-- if selected day is index 0 show current conditions as well as forecasted, defaults to index 0 -->
+      </div>
+
+      <div class="forecast-container">
+        <div class="forecast-day">
+          <!-- use to brainstorm what goes in each day, move to template -->
+        </div> 
+        <div class="forecast-calendar">
+          <!-- use css grid to make a calendar and populate it with the forecast -->
+          <!-- clicking on a day populates selected-weather with more details about that day -->
+        </div>
+        <!-- <template> day template </template> -->
+      </div>
+    </div>
     <script type="module" src="./index.js"></script>
   </body>
 </html>
