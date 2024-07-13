@@ -2,10 +2,10 @@ import getWeather from "./get-weather.js";
 
 const form = document.forms[0];
 const locationInput = document.getElementById("location");
+const unitInput = document.getElementById("unit");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  updateWeatherDisplay(locationInput.value);
-  form.reset();
+  updateWeatherDisplay(locationInput.value, Number(unitInput.value));
 });
 
 async function updateWeatherDisplay(location, unitIndex) {

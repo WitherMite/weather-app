@@ -9,8 +9,19 @@
   <body>
     <form novalidate>
       <div>
-        <label for="location">Location:</label
-        ><input type="text" id="location" />
+        <div>
+          <label for="location">Location:</label>
+          <input type="text" id="location" />
+        </div>
+        <div>
+          <label for="unit">Units:</label>
+          <select name="units" id="unit">
+            <option value="0" selected>Fahrenheit</option>
+            <option value="1">Celsius</option>
+            <option value="2">Celsius (UK)</option>
+            <option value="3">Scientific</option>
+          </select>
+        </div>
       </div>
       <button type="submit">Get Forecast</button>
     </form>
