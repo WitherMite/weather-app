@@ -31,17 +31,37 @@
 
       <div class="selected-weather">
         <!-- if selected day is index 0 show current conditions as well as forecasted, defaults to index 0 -->
+        <div class="date"></div>
+        <div class="temperature">
+          <!-- max/min (add current actual), feel max/min (replace with current actual) | [in popout] uv index, humidity, dewpoint -->
+        </div>
+        <div class="precipitation">
+          <!-- chance | [in popout] precip, cover (if current), type (if not null), snow (if not 0), snow depth (if not 0 and current) -->
+        </div>
+        <div class="description">
+          <!-- desc | [in popout] cloudcover, sunrise/set time, visibility, wind dir, wind gust, wind speed -->
+        </div>
       </div>
 
       <div class="forecast-container">
-        <div class="forecast-day">
-          <!-- use to brainstorm what goes in each day, move to template -->
-        </div> 
         <div class="forecast-calendar">
           <!-- use css grid to make a calendar and populate it with the forecast -->
           <!-- clicking on a day populates selected-weather with more details about that day -->
         </div>
-        <!-- <template> day template </template> -->
+
+        <template id="forecast-day-template">
+          <div class="forecast-day">
+            <div class="temperature">
+              <!-- max/min -->
+            </div>
+            <div class="precipitation">
+              <!-- chance -->
+            </div>
+            <div class="description">
+              <!-- conditions -->
+            </div>
+          </div>
+        </template>
       </div>
     </div>
     <script type="module" src="./index.js"></script>
