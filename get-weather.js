@@ -9,8 +9,8 @@ export default async function getWeather(locationSearch, unitIndex) {
   console.log(request);
 
   const location = request.resolvedAddress;
-  const current = reduceCurrentWeather(request.currentConditions);
-  const forecast = request.days.map(reduceDay);
+  const current = reduceProps(request.currentConditions);
+  const forecast = request.days.map(reduceProps);
 
   return { current, forecast, location };
 }
@@ -26,8 +26,17 @@ async function requestForecast(location) {
   }
 }
 
-// TODO: pass through needed properties after designing webpage
-
-function reduceDay(day) {}
-
-function reduceCurrentWeather(weather) {}
+const disallowed = await fetch("./unneeded-props.json").then((r) => r.json());
+function reduceProps(input, index) {
+  // false if index is nullish, true even when 0
+  const isInIterable = !!((index ?? -1) + 1);
+  const output = {};
+  for (const k in input) {
+    if (
+      disallowed[k] === true ||
+      disallowed[k] === "forecast" && isInIterable
+    ) continue;
+    output[k] = input[k];
+  }
+  return output;
+}
