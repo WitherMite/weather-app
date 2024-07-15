@@ -1,5 +1,5 @@
-import getWeather from "./get-weather.js";
-import updateDisplay from "./weather-display.js";
+import getWeather from "./src/get-weather.js";
+import updateDisplay from "./src/weather-display.js";
 
 const form = document.forms[0];
 const locationInput = document.getElementById("location");

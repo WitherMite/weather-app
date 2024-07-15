@@ -27,7 +27,7 @@ async function requestForecast(location) {
   }
 }
 
-const disallowed = await fetch("./unneeded-props.json").then((r) => r.json());
+const disallowed = await fetch("../unneeded-props.json").then((r) => r.json());
 
 function reduceProps(input, index) {
   // false if index is nullish or -1, true even when 0
