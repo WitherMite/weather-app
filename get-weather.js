@@ -27,6 +27,7 @@ async function requestForecast(location) {
 }
 
 const disallowed = await fetch("./unneeded-props.json").then((r) => r.json());
+
 function reduceProps(input, index) {
   // false if index is nullish, true even when 0
   const isInIterable = !!((index ?? -1) + 1);
