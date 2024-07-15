@@ -1,4 +1,5 @@
 import getWeather from "./get-weather.js";
+import updateDisplay from "./weather-display.js";
 
 const form = document.forms[0];
 const locationInput = document.getElementById("location");
@@ -12,4 +13,5 @@ async function updateWeatherDisplay(location, unitIndex) {
   if (location === "") location = "london";
   const weather = await getWeather(location, unitIndex);
   console.log(weather);
+  updateDisplay(weather);
 }

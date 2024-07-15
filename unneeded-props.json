@@ -1,15 +1,15 @@
 {
-    "datetimeEpoch": true,
-    "icon": true,
-    "moonphase": true,
-    "pressure": true,
-    "solarenergy": true,
-    "solarradiation": true,
-    "source": true,
-    "sunriseEpoch": true,
-    "sunsetEpoch": true,
-    "stations": true,
-    "severerisk": true,
-    "feelslike": "forecast",
-    "temp": "forecast"
+  "datetimeEpoch": true,
+  "icon": true,
+  "moonphase": true,
+  "pressure": true,
+  "solarenergy": true,
+  "solarradiation": true,
+  "source": true,
+  "sunriseEpoch": true,
+  "sunsetEpoch": true,
+  "stations": true,
+  "severerisk": true,
+  "feelslike": "forecast",
+  "temp": "forecast"
 }

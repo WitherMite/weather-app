@@ -11,8 +11,9 @@ export default async function getWeather(locationSearch, unitIndex) {
   const location = request.resolvedAddress;
   const current = reduceProps(request.currentConditions);
   const forecast = request.days.map(reduceProps);
+  const unit = currentUnit;
 
-  return { current, forecast, location };
+  return { current, forecast, location, unit };
 }
 
 async function requestForecast(location) {
@@ -29,14 +30,17 @@ async function requestForecast(location) {
 const disallowed = await fetch("./unneeded-props.json").then((r) => r.json());
 
 function reduceProps(input, index) {
-  // false if index is nullish, true even when 0
+  // false if index is nullish or -1, true even when 0
+  // should never be -1 unless passed manually, could use a ternary if I cared enough i guess
   const isInIterable = !!((index ?? -1) + 1);
   const output = {};
   for (const k in input) {
     if (
       disallowed[k] === true ||
-      disallowed[k] === "forecast" && isInIterable
-    ) continue;
+      (disallowed[k] === "forecast" && isInIterable)
+    ) {
+      continue;
+    }
     output[k] = input[k];
   }
   return output;
