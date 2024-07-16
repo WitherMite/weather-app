@@ -6,7 +6,6 @@ export default async function getWeather(locationSearch, unitIndex) {
     currentUnit = units[unitIndex];
   }
   const request = await requestForecast(locationSearch);
-  console.log(request);
 
   const location = request.resolvedAddress;
   const current = reduceProps(request.currentConditions);

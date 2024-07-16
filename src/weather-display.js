@@ -53,12 +53,12 @@ function populateExpanded(forecast, current) {
     const minFeel = createDataField(
       forecast.feelslikemin,
       currentUnits.temp,
-      "Feels like Low: "
+      "Feels like low: "
     );
     const maxFeel = createDataField(
       forecast.feelslikemax,
       currentUnits.temp,
-      "Feels like High: "
+      "Feels like high: "
     );
     expdTemp.appendChild(
       createContainerDiv([minFeel, maxFeel], "feel-forecast")
@@ -71,11 +71,30 @@ function populateExpanded(forecast, current) {
 
   clearDiv(expdPrecip);
   // add precipitation chance
+  let precipitation;
+  if (forecast.preciptype) {
+    precipitation = forecast.preciptype.join("/");
+    const arr = precipitation.split("");
+    arr[0] = arr[0].toUpperCase();
+    precipitation = arr.join("");
+  }
+
+  const precipChance = createDataField(
+    forecast.precipprob,
+    "%",
+    `${precipitation ?? "Precipitation"} chance: `
+  );
+
+  expdPrecip.appendChild(precipChance);
 
   // add precipitation popout
 
   clearDiv(expdDesc);
   // add description
+  const description = document.createElement("div");
+  description.textContent = forecast.description;
+
+  expdDesc.appendChild(description);
 
   // add misc popout to description
 }
