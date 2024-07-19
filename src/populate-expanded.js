@@ -18,6 +18,7 @@ export default function populateExpanded(forecast, current, units) {
 
   clearDiv(expdTemp);
   // add temperature
+  // TODO: rework to put feels like forecasts next to respective actual temps
   const temp = current
     ? createDataField(current.temp, units.temp, "Temperature: ")
     : false;

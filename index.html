@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <form novalidate>
-      <div>
+    <header>
+      <h1>Weather Forecast</h1>
+      <form novalidate>
         <div>
           <label for="location">Location:</label>
           <input type="text" id="location" />
@@ -22,13 +23,12 @@
             <option value="3">Scientific</option>
           </select>
         </div>
-      </div>
-      <button type="submit">Get Forecast</button>
-    </form>
+        <button type="submit">Get Forecast</button>
+      </form>
+    </header>
 
     <main class="weather-container">
-      <h1 class="location"></h1>
-
+      <h2 class="location"></h2>
       <div class="expanded-weather">
         <!-- if selected day is index 0 show current conditions as well as forecasted, defaults to index 0 -->
         <div class="date"></div>
