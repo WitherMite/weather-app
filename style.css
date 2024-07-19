@@ -94,9 +94,7 @@ main {
 
 .expanded-weather .temperature {
     text-align: start;
-    /* change this once rearranging temperature structure */
-    display: flex;
-    gap: 0.5rem;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
 }

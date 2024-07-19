@@ -1,10 +1,7 @@
-import {
-  clearDiv,
-  createDataField,
-  createContainerDiv,
-} from "./dom-helpers.js";
+import { clearDiv, createDataField } from "./dom-helpers.js";
 
 const expanded = document.querySelector(".expanded-weather");
+// TODO: generate children to prevent their padding from existing when empty
 const expdDate = expanded.querySelector(".date");
 const expdTemp = expanded.querySelector(".temperature");
 const expdPrecip = expanded.querySelector(".precipitation");
@@ -18,44 +15,36 @@ export default function populateExpanded(forecast, current, units) {
 
   clearDiv(expdTemp);
   // add temperature
-  // TODO: rework to put feels like forecasts next to respective actual temps
-  const temp = current
-    ? createDataField(current.temp, units.temp, "Temperature: ")
-    : false;
+  if (current) {
+    const temp = createDataField(current.temp, units.temp, "Temperature: ");
+    const feel = createDataField(current.feelslike, units.temp, "Feels like: ");
+    expdTemp.appendChild(temp);
+    expdTemp.appendChild(feel);
+  }
+
+  const maxTemp = createDataField(forecast.tempmax, units.temp, "High: ");
+  const maxFeel = createDataField(
+    forecast.feelslikemax,
+    units.temp,
+    "Feels like high: "
+  );
+  expdTemp.appendChild(maxTemp);
+  expdTemp.appendChild(maxFeel);
 
   const minTemp = createDataField(forecast.tempmin, units.temp, "Low: ");
-  const maxTemp = createDataField(forecast.tempmax, units.temp, "High: ");
-  expdTemp.appendChild(
-    createContainerDiv([temp, minTemp, maxTemp], "temp-forecast")
+  const minFeel = createDataField(
+    forecast.feelslikemin,
+    units.temp,
+    "Feels like low: "
   );
-
-  // add feelslike
-  const feel = current
-    ? createDataField(current.feelslike, units.temp, "Feels like: ")
-    : false;
-  if (!feel) {
-    const minFeel = createDataField(
-      forecast.feelslikemin,
-      units.temp,
-      "Feels like low: "
-    );
-    const maxFeel = createDataField(
-      forecast.feelslikemax,
-      units.temp,
-      "Feels like high: "
-    );
-    expdTemp.appendChild(
-      createContainerDiv([minFeel, maxFeel], "feel-forecast")
-    );
-  } else {
-    expdTemp.appendChild(createContainerDiv(feel, "feel-forecast"));
-  }
+  expdTemp.appendChild(minTemp);
+  expdTemp.appendChild(minFeel);
 
   // add temperature popout
 
   clearDiv(expdPrecip);
   // add precipitation chance
-  let precipitation;
+  let precipitation = "Precipitation";
   if (forecast.preciptype) {
     precipitation = forecast.preciptype.join("/");
     const arr = precipitation.split("");
@@ -66,7 +55,7 @@ export default function populateExpanded(forecast, current, units) {
   const precipChance = createDataField(
     forecast.precipprob,
     "%",
-    `${precipitation ?? "Precipitation"} chance: `
+    `${precipitation} chance: `
   );
 
   expdPrecip.appendChild(precipChance);
