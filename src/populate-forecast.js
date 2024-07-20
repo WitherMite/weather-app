@@ -16,7 +16,7 @@ export default function populateForecast(forecast) {
   }
 
   const startDate = new Date(forecast[0].datetime);
-  const startDay = startDate.getDay();
+  const startDay = startDate.getUTCDay();
   // remove padding spaces from array (still in DOM)
   days.splice(0, startDay);
   days.splice(forecast.length, days.length - forecast.length);
@@ -29,7 +29,7 @@ export default function populateForecast(forecast) {
     const forecastDay = forecast[index];
 
     const date = new Date(forecastDay.datetime);
-    const dayOfMonth = date.getDate();
+    const dayOfMonth = date.getUTCDate();
     dateDiv.textContent = dayOfMonth;
 
     // TODO: write weather data to days
