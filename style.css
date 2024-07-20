@@ -80,13 +80,13 @@ main {
     gap: 1rem;
 }
 
-.location {
+.location.populated {
     padding: 1rem;
     background-color: var(--secondary-color);
     border-radius: 12px;
 }
 
-.expanded-weather {
+.expanded-weather.populated {
     padding: 0.5rem;
     display: grid;
     gap: 0.5rem;
@@ -110,7 +110,7 @@ main {
 
 /* calendar styling */
 
-.forecast-calendar {
+.forecast-calendar.populated {
     padding: 0.5rem;
     display: grid;
     grid-template-columns: repeat(7, 1fr);

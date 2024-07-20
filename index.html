@@ -31,6 +31,8 @@
       <h2 class="location"></h2>
       <div class="expanded-weather">
         <!-- if selected day is index 0 show current conditions as well as forecasted, defaults to index 0 -->
+      </div>
+      <template id="expanded-weather-template">
         <div class="date"></div>
         <div class="temperature">
           <!-- max/min (add current actual), feel max/min (replace with current actual) | [in popout] uv index, humidity, dewpoint -->
@@ -41,26 +43,19 @@
         <div class="description">
           <!-- desc | [in popout] cloudcover, sunrise/set time, visibility, wind dir, wind gust, wind speed -->
         </div>
-      </div>
+      </template>
 
       <div class="forecast-container">
         <div class="forecast-calendar">
-          <!-- use css grid to make a calendar and populate it with the forecast -->
           <!-- clicking on a day populates selected-weather with more details about that day -->
         </div>
 
         <template id="forecast-day-template">
           <div class="forecast-day">
             <div class="date"></div>
-            <div class="temperature">
-              <!-- max/min -->
-            </div>
-            <div class="precipitation">
-              <!-- chance -->
-            </div>
-            <div class="description">
-              <!-- conditions -->
-            </div>
+            <div class="temperature"></div>
+            <div class="precipitation"></div>
+            <div class="description"></div>
           </div>
         </template>
       </div>

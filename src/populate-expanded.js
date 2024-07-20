@@ -1,13 +1,18 @@
 import { clearDiv, createDataField } from "./dom-helpers.js";
 
 const expanded = document.querySelector(".expanded-weather");
-// TODO: generate children to prevent their padding from existing when empty
-const expdDate = expanded.querySelector(".date");
-const expdTemp = expanded.querySelector(".temperature");
-const expdPrecip = expanded.querySelector(".precipitation");
-const expdDesc = expanded.querySelector(".description");
+
+const template = document.getElementById("expanded-weather-template");
+const expandedContent = template.content.cloneNode(true);
+
+const expdDate = expandedContent.querySelector(".date");
+const expdTemp = expandedContent.querySelector(".temperature");
+const expdPrecip = expandedContent.querySelector(".precipitation");
+const expdDesc = expandedContent.querySelector(".description");
 
 export default function populateExpanded(forecast, current, units) {
+  expanded.appendChild(expandedContent);
+  expanded.classList.add("populated");
   const date = current
     ? new Date(`${forecast.datetime}T${current.datetime}`)
     : new Date(forecast.datetime);
@@ -26,7 +31,7 @@ export default function populateExpanded(forecast, current, units) {
   const maxFeel = createDataField(
     forecast.feelslikemax,
     units.temp,
-    "Feels like high: "
+    "Feel high: "
   );
   expdTemp.appendChild(maxTemp);
   expdTemp.appendChild(maxFeel);
@@ -35,7 +40,7 @@ export default function populateExpanded(forecast, current, units) {
   const minFeel = createDataField(
     forecast.feelslikemin,
     units.temp,
-    "Feels like low: "
+    "Feel low: "
   );
   expdTemp.appendChild(minTemp);
   expdTemp.appendChild(minFeel);

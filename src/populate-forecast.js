@@ -4,6 +4,7 @@ const calendar = document.querySelector(".forecast-calendar");
 const dayTemplate = document.getElementById("forecast-day-template");
 
 export default function populateForecast(forecast, units) {
+  calendar.classList.add("populated");
   clearDiv(calendar);
   const days = [];
   // create a list of day containers, so that all forecasted days can be put inside their corresponding grid space on the calendar with empty padding spaces
