@@ -76,27 +76,36 @@ main {
     background-color: var(--primary-color);
     display: grid;
     place-content: center;
+    justify-items: center;
     gap: 1rem;
 }
 
-.location,
-.expanded-weather > div {
+.location {
     padding: 1rem;
     background-color: var(--secondary-color);
     border-radius: 12px;
 }
 
 .expanded-weather {
+    padding: 0.5rem;
     display: grid;
     gap: 0.5rem;
     text-align: center;
+    background-color: var(--secondary-color);
+    border-radius: 12px;
+}
+
+.expanded-weather > div {
+    padding: 1rem;
+    background-color: var(--tertiary-color);
+    border-radius: 12px;
 }
 
 .expanded-weather .temperature {
     text-align: start;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem 1rem;
+    gap: 0.25rem 1rem;
 }
 
 /* calendar styling */
@@ -112,6 +121,7 @@ main {
 
 .day-container,
 .forecast-day {
+    padding: 0.25rem;
     border-radius: 8px;
     background-color: var(--tertiary-color);
 }
