@@ -98,3 +98,25 @@ main {
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem 1rem;
 }
+
+/* calendar styling */
+
+.forecast-calendar {
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    border-radius: 12px;
+    background-color: var(--secondary-color);
+}
+
+.day-container,
+.forecast-day {
+    border-radius: 8px;
+    background-color: var(--tertiary-color);
+}
+
+.forecast-day {
+    display: grid;
+    place-content: center;
+}
