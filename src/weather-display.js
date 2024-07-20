@@ -17,6 +17,6 @@ export default function updateDisplay(weather) {
   currentUnits = unitList[weather.unit];
   location.textContent = weather.location;
   populateExpanded(weather.forecast[0], weather.current, currentUnits);
-  populateForecast(weather.forecast);
+  populateForecast(weather.forecast, currentUnits);
   initDropdowns();
 }

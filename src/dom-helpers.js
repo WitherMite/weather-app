@@ -3,13 +3,18 @@ function clearDiv(div) {
 }
 
 function createDataField(number, unit, prefix) {
-  const preSpan = document.createElement("span");
+  let preEle;
   const numberSpan = document.createElement("span");
   const unitSpan = document.createElement("span");
-  preSpan.textContent = prefix;
+  if (typeof prefix === "string") {
+    preEle = document.createElement("span");
+    preEle.textContent = prefix;
+  } else if (prefix instanceof Element) {
+    preEle = prefix;
+  }
   numberSpan.textContent = number;
   unitSpan.textContent = unit;
-  return createContainerDiv([preSpan, numberSpan, unitSpan]);
+  return createContainerDiv([preEle, numberSpan, unitSpan]);
 }
 
 function createContainerDiv(elements, classNames) {

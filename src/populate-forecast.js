@@ -1,9 +1,9 @@
-import { clearDiv } from "./dom-helpers.js";
+import { clearDiv, createDataField } from "./dom-helpers.js";
 
 const calendar = document.querySelector(".forecast-calendar");
 const dayTemplate = document.getElementById("forecast-day-template");
 
-export default function populateForecast(forecast) {
+export default function populateForecast(forecast, units) {
   clearDiv(calendar);
   const days = [];
   // create a list of day containers, so that all forecasted days can be put inside their corresponding grid space on the calendar with empty padding spaces
@@ -32,7 +32,25 @@ export default function populateForecast(forecast) {
     const dayOfMonth = date.getUTCDate();
     dateDiv.textContent = dayOfMonth;
 
-    // TODO: write weather data to days
+    // TODO: replace prefixes with svg icons
+    const tempDiv = dayElement.querySelector(".temperature");
+    const maxTemp = createDataField(forecastDay.tempmax, units.temp, "High: ");
+    const minTemp = createDataField(forecastDay.tempmin, units.temp, "Low: ");
+    tempDiv.appendChild(maxTemp);
+    tempDiv.appendChild(minTemp);
+
+    const precipDiv = dayElement.querySelector(".precipitation");
+    const precipChance = createDataField(
+      forecastDay.precipprob,
+      "%",
+      `precipitation chance: `
+    );
+    precipDiv.appendChild(precipChance);
+
+    const descDiv = dayElement.querySelector(".description");
+    const conditions = document.createElement("div");
+    conditions.textContent = forecastDay.conditions;
+    descDiv.appendChild(conditions);
 
     dayContainer.appendChild(dayElement);
   }
