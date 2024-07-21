@@ -18,6 +18,7 @@ export default async function getWeather(locationSearch, unitIndex) {
 async function requestForecast(location) {
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&unitGroup=${currentUnit}&include=current`;
 
+  // TODO: actually handle errors and bad responses
   try {
     const weather = await fetch(url).then((response) => response.json());
     return weather;

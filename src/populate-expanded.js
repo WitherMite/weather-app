@@ -1,4 +1,8 @@
-import { clearDiv, createDataField } from "./dom-helpers.js";
+import {
+  clearDiv,
+  createDataField,
+  createContainerDiv,
+} from "./dom-helpers.js";
 
 const expanded = document.querySelector(".expanded-weather");
 
@@ -10,7 +14,7 @@ const expdTemp = expandedContent.querySelector(".temperature");
 const expdPrecip = expandedContent.querySelector(".precipitation");
 const expdDesc = expandedContent.querySelector(".description");
 
-export default function populateExpanded(forecast, current, units) {
+export default function populateExpanded(forecast, units, current) {
   expanded.appendChild(expandedContent);
   expanded.classList.add("populated");
   const date = current
@@ -46,6 +50,18 @@ export default function populateExpanded(forecast, current, units) {
   expdTemp.appendChild(minFeel);
 
   // add temperature popout
+  const humidity = createDataField(forecast.humidity, "%", "Humidity: ");
+  const uvIndex = createDataField(forecast.uvindex, "/10", "UV Index: ");
+  const dewpoint = createDataField(forecast.dew, units.temp, "Dewpoint: ");
+  const tempBounding = document.createElement("div");
+
+  const tempPopout = createContainerDiv(
+    [humidity, uvIndex, dewpoint, tempBounding],
+    ["temp-popout", "popout"]
+  );
+  tempPopout.dataset.boundingClass = "temp-popout-bounds";
+  tempBounding.classList.add("temp-popout-bounds");
+  expdTemp.appendChild(tempPopout);
 
   clearDiv(expdPrecip);
   // add precipitation chance
@@ -66,6 +82,31 @@ export default function populateExpanded(forecast, current, units) {
   expdPrecip.appendChild(precipChance);
 
   // add precipitation popout
+  const precipFall = createDataField(
+    forecast.precip,
+    units.lengthSmall,
+    "Precipitation: "
+  );
+  const precipCover = current
+    ? createDataField(forecast.precipcover, "%", "Precipitation cover: ")
+    : false;
+  const snowFall =
+    forecast.snow !== 0
+      ? createDataField(forecast.snow, units.lengthMed, "New snow: ")
+      : false;
+  const snowDepth =
+    forecast.snowdepth !== 0 && current
+      ? createDataField(forecast.snowDepth, units.lengthMed, "Snow depth: ")
+      : false;
+  const precipBounding = document.createElement("div");
+
+  const precipPopout = createContainerDiv(
+    [precipFall, precipCover, snowFall, snowDepth, precipBounding],
+    ["precip-popout", "popout"]
+  );
+  precipPopout.dataset.boundingClass = "precip-popout-bounds";
+  precipBounding.classList.add("precip-popout-bounds");
+  expdPrecip.appendChild(precipPopout);
 
   clearDiv(expdDesc);
   // add description
@@ -75,4 +116,37 @@ export default function populateExpanded(forecast, current, units) {
   expdDesc.appendChild(description);
 
   // add misc popout to description
+  const cloudCover = createDataField(forecast.cloudcover, "%", "Cloud cover: ");
+  const sunrise = createDataField(forecast.sunrise, "", "Sunrise: ");
+  const sunset = createDataField(forecast.sunset, "", "Sunset: ");
+  const visibility = createDataField(
+    forecast.visibility,
+    units.distance,
+    "Visibility: "
+  );
+  const windDir = createDataField(forecast.winddir, "°", "Wind direction: ");
+  const windSpd = createDataField(
+    forecast.windspeed,
+    units.speed,
+    "Wind speed: "
+  );
+  const windGst = createDataField(forecast.windgust, units.speed, "Gusts: ");
+  const descBounding = document.createElement("div");
+
+  const descPopout = createContainerDiv(
+    [
+      cloudCover,
+      sunrise,
+      sunset,
+      visibility,
+      windDir,
+      windSpd,
+      windGst,
+      descBounding,
+    ],
+    ["desc-popout", "popout"]
+  );
+  descPopout.dataset.boundingClass = "desc-popout-bounds";
+  descBounding.classList.add("desc-popout-bounds");
+  expdDesc.appendChild(descPopout);
 }
