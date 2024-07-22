@@ -35,4 +35,20 @@ function createContainerDiv(elements, classNames) {
   return div;
 }
 
-export { clearDiv, createDataField, createContainerDiv };
+async function createPopoutBtn(forPopout) {
+  const btn = document.createElement("button");
+  btn.classList.add("popout-btn");
+  btn.dataset.forClass = forPopout;
+
+  const img = document.createElement("img");
+  img.classList.add("popout-img");
+  img.title = "Click for more";
+  img.src = await fetch("../src/assets/popout.svg")
+    .then((r) => r.url)
+    .catch((e) => console.log(e)); // actually handle this at some point
+
+  btn.appendChild(img);
+  return btn;
+}
+
+export { clearDiv, createDataField, createContainerDiv, createPopoutBtn };

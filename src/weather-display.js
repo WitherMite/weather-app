@@ -37,11 +37,11 @@ const unitList = {
 };
 let currentUnits;
 
-export default function updateDisplay(weather) {
+export default async function updateDisplay(weather) {
   currentUnits = unitList[weather.unit];
   location.textContent = weather.location;
   location.classList.add("populated");
-  populateExpanded(weather.forecast[0], currentUnits, weather.current);
+  await populateExpanded(weather.forecast[0], currentUnits, weather.current);
   populateForecast(weather.forecast, currentUnits);
-  initDropdowns(undefined, "popout-mouseover");
+  initDropdowns("popout-btn");
 }

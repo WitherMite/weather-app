@@ -1,39 +1,21 @@
-let openClass;
-
-export default function initDropdowns(
-  btnClass = "dropdown-btn",
-  mouseoverClass = "dropdown-mouseover",
-  open = "open"
-) {
-  openClass = open;
-
+export default function initDropdowns(btnClass) {
   const dropdownBtns = document.querySelectorAll(`.${btnClass}`);
-  const dropdownMouseovers = document.querySelectorAll(`.${mouseoverClass}`);
-
   dropdownBtns.forEach((btn) => addButtonBehavior(btn));
-  dropdownMouseovers.forEach((element) => addMouseoverBehavior(element));
 }
 
 function addButtonBehavior(btn) {
   const dropdown = document.querySelector(`.${btn.dataset.forClass}`);
-  btn.addEventListener("click", () => dropdown.classList.toggle(openClass));
-}
 
-function addMouseoverBehavior(ele) {
-  const dropdown = document.querySelector(`.${ele.dataset.forClass}`);
-  const boundingBoxes = document.querySelectorAll(
-    `.${dropdown.dataset.boundingClass}`
-  );
-
-  ele.addEventListener("mouseover", () => {
-    dropdown.classList.add(openClass);
-    boundingBoxes.forEach((box) => box.classList.add(openClass));
+  btn.addEventListener("click", () => {
+    dropdown.classList.add("open");
+    document.addEventListener("click", closeOnOutsideClick);
   });
 
-  boundingBoxes.forEach((box) => {
-    box.addEventListener("mouseout", () => {
-      dropdown.classList.remove(openClass);
-      boundingBoxes.forEach((box) => box.classList.remove(openClass));
-    });
-  });
+  function closeOnOutsideClick(e) {
+    const isInside = dropdown.contains(e.target) || btn.contains(e.target);
+    if (!isInside) {
+      dropdown.classList.remove("open");
+      document.removeEventListener("click", closeOnOutsideClick);
+    }
+  }
 }

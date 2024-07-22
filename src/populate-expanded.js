@@ -2,6 +2,7 @@ import {
   clearDiv,
   createDataField,
   createContainerDiv,
+  createPopoutBtn,
 } from "./dom-helpers.js";
 
 const expanded = document.querySelector(".expanded-weather");
@@ -14,9 +15,10 @@ const expdTemp = expandedContent.querySelector(".temperature");
 const expdPrecip = expandedContent.querySelector(".precipitation");
 const expdDesc = expandedContent.querySelector(".description");
 
-export default function populateExpanded(forecast, units, current) {
+export default async function populateExpanded(forecast, units, current) {
   expanded.appendChild(expandedContent);
   expanded.classList.add("populated");
+
   const date = current
     ? new Date(`${forecast.datetime}T${current.datetime}`)
     : new Date(forecast.datetime);
@@ -24,6 +26,9 @@ export default function populateExpanded(forecast, units, current) {
 
   clearDiv(expdTemp);
   // add temperature
+
+  await createPopoutBtn("temp-popout").then((btn) => expdTemp.appendChild(btn));
+
   if (current) {
     const temp = createDataField(current.temp, units.temp, "Temperature: ");
     const feel = createDataField(current.feelslike, units.temp, "Feels like: ");
@@ -50,21 +55,24 @@ export default function populateExpanded(forecast, units, current) {
   expdTemp.appendChild(minFeel);
 
   // add temperature popout
+
   const humidity = createDataField(forecast.humidity, "%", "Humidity: ");
   const uvIndex = createDataField(forecast.uvindex, "/10", "UV Index: ");
   const dewpoint = createDataField(forecast.dew, units.temp, "Dewpoint: ");
-  const tempBounding = document.createElement("div");
 
   const tempPopout = createContainerDiv(
-    [humidity, uvIndex, dewpoint, tempBounding],
+    [humidity, uvIndex, dewpoint],
     ["temp-popout", "popout"]
   );
-  tempPopout.dataset.boundingClass = "temp-popout-bounds";
-  tempBounding.classList.add("temp-popout-bounds");
   expdTemp.appendChild(tempPopout);
 
   clearDiv(expdPrecip);
   // add precipitation chance
+
+  await createPopoutBtn("precip-popout").then((btn) =>
+    expdPrecip.appendChild(btn)
+  );
+
   let precipitation = "Precipitation";
   if (forecast.preciptype) {
     precipitation = forecast.preciptype.join("/");
@@ -82,6 +90,7 @@ export default function populateExpanded(forecast, units, current) {
   expdPrecip.appendChild(precipChance);
 
   // add precipitation popout
+
   const precipFall = createDataField(
     forecast.precip,
     units.lengthSmall,
@@ -98,24 +107,25 @@ export default function populateExpanded(forecast, units, current) {
     forecast.snowdepth !== 0 && current
       ? createDataField(forecast.snowDepth, units.lengthMed, "Snow depth: ")
       : false;
-  const precipBounding = document.createElement("div");
 
   const precipPopout = createContainerDiv(
-    [precipFall, precipCover, snowFall, snowDepth, precipBounding],
+    [precipFall, precipCover, snowFall, snowDepth],
     ["precip-popout", "popout"]
   );
-  precipPopout.dataset.boundingClass = "precip-popout-bounds";
-  precipBounding.classList.add("precip-popout-bounds");
   expdPrecip.appendChild(precipPopout);
 
   clearDiv(expdDesc);
   // add description
+
+  await createPopoutBtn("desc-popout").then((btn) => expdDesc.appendChild(btn));
+
   const description = document.createElement("div");
   description.textContent = forecast.description;
 
   expdDesc.appendChild(description);
 
   // add misc popout to description
+
   const cloudCover = createDataField(forecast.cloudcover, "%", "Cloud cover: ");
   const sunrise = createDataField(forecast.sunrise, "", "Sunrise: ");
   const sunset = createDataField(forecast.sunset, "", "Sunset: ");
@@ -131,22 +141,10 @@ export default function populateExpanded(forecast, units, current) {
     "Wind speed: "
   );
   const windGst = createDataField(forecast.windgust, units.speed, "Gusts: ");
-  const descBounding = document.createElement("div");
 
   const descPopout = createContainerDiv(
-    [
-      cloudCover,
-      sunrise,
-      sunset,
-      visibility,
-      windDir,
-      windSpd,
-      windGst,
-      descBounding,
-    ],
+    [cloudCover, sunrise, sunset, visibility, windDir, windSpd, windGst],
     ["desc-popout", "popout"]
   );
-  descPopout.dataset.boundingClass = "desc-popout-bounds";
-  descBounding.classList.add("desc-popout-bounds");
   expdDesc.appendChild(descPopout);
 }

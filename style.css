@@ -45,7 +45,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+header button:hover {
     outline: 2px solid rgb(255, 255, 255);
 }
 
@@ -96,16 +96,23 @@ main {
 }
 
 .expanded-weather > div {
+    position: relative;
     padding: 1rem;
     background-color: var(--tertiary-color);
     border-radius: 12px;
 }
 
 .expanded-weather .temperature {
+    padding-top: 2rem;
     text-align: start;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.25rem 1rem;
+}
+
+.expanded-weather .precipitation,
+.expanded-weather .description {
+    padding-top: 2rem;
 }
 
 /* calendar styling */
@@ -129,4 +136,35 @@ main {
 .forecast-day {
     display: grid;
     place-content: center;
+}
+
+/* Popouts */
+
+.popout-img {
+    width: 2.75rem;
+}
+
+.popout-btn {
+    position: absolute;
+    top: -0.75rem;
+    right: 0;
+    padding-right: 0.75rem;
+    background-color: transparent;
+}
+
+.popout {
+    display: none;
+    position: absolute;
+    left: calc(100% + 0.75rem);
+    top: 0;
+    background-color: var(--tertiary-color);
+    width: max-content;
+    padding: 1rem;
+    border: 0.5rem, solid var(--secondary-color);
+    border-radius: 12px;
+    box-shadow: 1px 2px 8px -2px rgb(54, 54, 54);
+}
+
+.open {
+    display: block;
 }
