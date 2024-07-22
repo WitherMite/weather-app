@@ -1,0 +1,30 @@
+{
+  "us": {
+    "temp": "°F",
+    "lengthSmall": " in.",
+    "lengthMed": " in.",
+    "distance": "mi",
+    "speed": "mph"
+  },
+  "metric": {
+    "temp": "°C",
+    "lengthSmall": "mm",
+    "lengthMed": "cm",
+    "distance": "km",
+    "speed": "kph"
+  },
+  "uk": {
+    "temp": "°C",
+    "lengthSmall": "mm",
+    "lengthMed": "cm",
+    "distance": "mi",
+    "speed": "mph"
+  },
+  "base": {
+    "temp": "K",
+    "lengthSmall": "mm",
+    "lengthMed": "cm",
+    "distance": "km",
+    "speed": "kph"
+  }
+}

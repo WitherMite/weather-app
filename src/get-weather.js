@@ -1,22 +1,23 @@
-const units = ["us", "metric", "uk", "base"];
-let currentUnit = units[0];
+const unitKeys = ["us", "metric", "uk", "base"];
+const unitList = await fetch("../src/unit-list.json").then((r) => r.json());
+let currentUnits = unitKeys[0];
 
 export default async function getWeather(locationSearch, unitIndex) {
   if (typeof unitIndex === "number" && unitIndex >= 0 && unitIndex < 4) {
-    currentUnit = units[unitIndex];
+    currentUnits = unitKeys[unitIndex];
   }
   const request = await requestForecast(locationSearch);
 
   const location = request.resolvedAddress;
   const current = reduceProps(request.currentConditions);
   const forecast = request.days.map(reduceProps);
-  const unit = currentUnit;
+  const units = unitList[currentUnits];
 
-  return { current, forecast, location, unit };
+  return { current, forecast, location, units };
 }
 
 async function requestForecast(location) {
-  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&unitGroup=${currentUnit}&include=current`;
+  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&unitGroup=${currentUnits}&include=current`;
 
   // TODO: actually handle errors and bad responses
   try {
