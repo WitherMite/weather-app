@@ -135,7 +135,22 @@ main {
 
 .forecast-day {
     display: grid;
-    place-content: center;
+}
+
+.forecast-day .date {
+    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.forecast-day img {
+    margin-bottom: -0.25rem;
+    width: 1.5rem;
+    padding-right: 0.25rem;
+}
+
+.forecast-day div div {
+    margin-top: 0.25rem;
 }
 
 /* Popouts */

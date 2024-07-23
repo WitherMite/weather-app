@@ -1,7 +1,10 @@
-import { clearDiv, createDataField } from "./dom-helpers.js";
+import { clearDiv, createDataField, getUrl } from "./dom-helpers.js";
 
 const calendar = document.querySelector(".forecast-calendar");
 const dayTemplate = document.getElementById("forecast-day-template");
+const highSvg = await getUrl("../src/assets/temperature-arrow-up.svg");
+const lowSvg = await getUrl("../src/assets/temperature-arrow-down.svg");
+const rainSvg = await getUrl("../src/assets/rain.svg");
 
 export default function populateForecast(forecast, units) {
   calendar.classList.add("populated");
@@ -33,19 +36,21 @@ export default function populateForecast(forecast, units) {
     const dayOfMonth = date.getUTCDate();
     dateDiv.textContent = dayOfMonth;
 
-    // TODO: replace prefixes with svg icons
+    const highImg = document.createElement("img");
+    const lowImg = document.createElement("img");
+    const rainImg = document.createElement("img");
+    highImg.src = highSvg;
+    lowImg.src = lowSvg;
+    rainImg.src = rainSvg;
+
     const tempDiv = dayElement.querySelector(".temperature");
-    const maxTemp = createDataField(forecastDay.tempmax, units.temp, "High: ");
-    const minTemp = createDataField(forecastDay.tempmin, units.temp, "Low: ");
+    const maxTemp = createDataField(forecastDay.tempmax, units.temp, highImg);
+    const minTemp = createDataField(forecastDay.tempmin, units.temp, lowImg);
     tempDiv.appendChild(maxTemp);
     tempDiv.appendChild(minTemp);
 
     const precipDiv = dayElement.querySelector(".precipitation");
-    const precipChance = createDataField(
-      forecastDay.precipprob,
-      "%",
-      `precipitation chance: `
-    );
+    const precipChance = createDataField(forecastDay.precipprob, "%", rainImg);
     precipDiv.appendChild(precipChance);
 
     const descDiv = dayElement.querySelector(".description");

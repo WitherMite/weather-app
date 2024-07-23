@@ -35,6 +35,15 @@ function createContainerDiv(elements, classNames) {
   return div;
 }
 
+async function getUrl(path) {
+  return await fetch(path)
+    .then((r) => r.url)
+    .catch((e) => console.log(e)); // actually handle this at some point
+}
+
+// pre-fetch img so it isnt called every time a new button is made
+const popoutSvg = await getUrl("../src/assets/popout.svg");
+
 async function createPopoutBtn(forPopout) {
   const btn = document.createElement("button");
   btn.classList.add("popout-btn");
@@ -43,12 +52,15 @@ async function createPopoutBtn(forPopout) {
   const img = document.createElement("img");
   img.classList.add("popout-img");
   img.title = "Click for more";
-  img.src = await fetch("../src/assets/popout.svg")
-    .then((r) => r.url)
-    .catch((e) => console.log(e)); // actually handle this at some point
-
+  img.src = popoutSvg;
   btn.appendChild(img);
   return btn;
 }
 
-export { clearDiv, createDataField, createContainerDiv, createPopoutBtn };
+export {
+  clearDiv,
+  createDataField,
+  createContainerDiv,
+  createPopoutBtn,
+  getUrl,
+};
