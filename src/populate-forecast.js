@@ -28,10 +28,10 @@ export default function populateForecast(forecast, units) {
   days.forEach(populateDay);
 
   function populateDay(dayContainer, index) {
-    const dayElement = dayTemplate.content.cloneNode(true);
-    const dateDiv = dayElement.querySelector(".date");
+    const dayElements = dayTemplate.content.cloneNode(true);
     const forecastDay = forecast[index];
 
+    const dateDiv = dayElements.querySelector(".date");
     const date = new Date(forecastDay.datetime);
     const dayOfMonth = date.getUTCDate();
     dateDiv.textContent = dayOfMonth;
@@ -43,21 +43,22 @@ export default function populateForecast(forecast, units) {
     lowImg.src = lowSvg;
     rainImg.src = rainSvg;
 
-    const tempDiv = dayElement.querySelector(".temperature");
+    const tempDiv = dayElements.querySelector(".temperature");
     const maxTemp = createDataField(forecastDay.tempmax, units.temp, highImg);
     const minTemp = createDataField(forecastDay.tempmin, units.temp, lowImg);
     tempDiv.appendChild(maxTemp);
     tempDiv.appendChild(minTemp);
 
-    const precipDiv = dayElement.querySelector(".precipitation");
+    const precipDiv = dayElements.querySelector(".precipitation");
     const precipChance = createDataField(forecastDay.precipprob, "%", rainImg);
     precipDiv.appendChild(precipChance);
 
-    const descDiv = dayElement.querySelector(".description");
+    const descDiv = dayElements.querySelector(".description");
     const conditions = document.createElement("div");
     conditions.textContent = forecastDay.conditions;
     descDiv.appendChild(conditions);
 
-    dayContainer.appendChild(dayElement);
+    dayContainer.dataset.dayIndex = index;
+    dayContainer.appendChild(dayElements);
   }
 }

@@ -15,10 +15,12 @@ const expdTemp = expandedContent.querySelector(".temperature");
 const expdPrecip = expandedContent.querySelector(".precipitation");
 const expdDesc = expandedContent.querySelector(".description");
 
+// TODO: find out why when called by calendar the popups arent added
 export default async function populateExpanded(forecast, units, current) {
   expanded.appendChild(expandedContent);
   expanded.classList.add("populated");
 
+  // TODO: fix date string, it being given in queried location's timezone is a headache...
   const date = current
     ? new Date(`${forecast.datetime}T${current.datetime}`)
     : new Date(forecast.datetime);

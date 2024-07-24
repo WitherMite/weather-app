@@ -29,9 +29,8 @@
 
     <main class="weather-container">
       <h2 class="location"></h2>
-      <div class="expanded-weather">
-        <!-- if selected day is index 0 show current conditions as well as forecasted, defaults to index 0 -->
-      </div>
+      <div class="expanded-weather"></div>
+
       <template id="expanded-weather-template">
         <div class="date"></div>
         <div class="temperature"></div>
@@ -40,9 +39,7 @@
       </template>
 
       <div class="forecast-container">
-        <div class="forecast-calendar">
-          <!-- clicking on a day populates selected-weather with more details about that day -->
-        </div>
+        <div class="forecast-calendar"></div>
 
         <template id="forecast-day-template">
           <div class="forecast-day">
