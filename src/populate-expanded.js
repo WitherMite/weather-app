@@ -4,38 +4,51 @@ import {
   createContainerDiv,
   createPopoutBtn,
 } from "./dom-helpers.js";
+import initDropdowns from "./dropdowns.js";
 
 const expanded = document.querySelector(".expanded-weather");
+let forecast, units, current;
 
-const template = document.getElementById("expanded-weather-template");
-const expandedContent = template.content.cloneNode(true);
+export default async function populateExpanded(wForecast, wUnits, wCurrent) {
+  const template = document.getElementById("expanded-weather-template");
+  const expandedContent = template.content.cloneNode(true);
 
-const expdDate = expandedContent.querySelector(".date");
-const expdTemp = expandedContent.querySelector(".temperature");
-const expdPrecip = expandedContent.querySelector(".precipitation");
-const expdDesc = expandedContent.querySelector(".description");
+  const expdDate = expandedContent.querySelector(".date");
+  const expdTemp = expandedContent.querySelector(".temperature");
+  const expdPrecip = expandedContent.querySelector(".precipitation");
+  const expdDesc = expandedContent.querySelector(".description");
 
-// TODO: find out why when called by calendar the popups arent added
-export default async function populateExpanded(forecast, units, current) {
+  // move vars up scope to avoid passing args or nesting functions
+  [forecast, units, current] = [wForecast, wUnits, wCurrent];
+
+  clearDiv(expanded);
   expanded.appendChild(expandedContent);
   expanded.classList.add("populated");
 
+  populateDate(expdDate);
+  await populateTemperature(expdTemp);
+  await populatePrecipitation(expdPrecip);
+  await populateDescription(expdDesc);
+
+  initDropdowns("popout-btn");
+}
+
+function populateDate(element) {
   // TODO: fix date string, it being given in queried location's timezone is a headache...
   const date = current
     ? new Date(`${forecast.datetime}T${current.datetime}`)
     : new Date(forecast.datetime);
-  expdDate.textContent = date.toLocaleString();
+  element.textContent = date.toLocaleString();
+}
 
-  clearDiv(expdTemp);
-  // add temperature
-
-  await createPopoutBtn("temp-popout").then((btn) => expdTemp.appendChild(btn));
+async function populateTemperature(element) {
+  await createPopoutBtn("temp-popout").then((btn) => element.appendChild(btn));
 
   if (current) {
     const temp = createDataField(current.temp, units.temp, "Temperature: ");
     const feel = createDataField(current.feelslike, units.temp, "Feels like: ");
-    expdTemp.appendChild(temp);
-    expdTemp.appendChild(feel);
+    element.appendChild(temp);
+    element.appendChild(feel);
   }
 
   const maxTemp = createDataField(forecast.tempmax, units.temp, "High: ");
@@ -44,8 +57,8 @@ export default async function populateExpanded(forecast, units, current) {
     units.temp,
     "Feel high: "
   );
-  expdTemp.appendChild(maxTemp);
-  expdTemp.appendChild(maxFeel);
+  element.appendChild(maxTemp);
+  element.appendChild(maxFeel);
 
   const minTemp = createDataField(forecast.tempmin, units.temp, "Low: ");
   const minFeel = createDataField(
@@ -53,8 +66,8 @@ export default async function populateExpanded(forecast, units, current) {
     units.temp,
     "Feel low: "
   );
-  expdTemp.appendChild(minTemp);
-  expdTemp.appendChild(minFeel);
+  element.appendChild(minTemp);
+  element.appendChild(minFeel);
 
   // add temperature popout
 
@@ -66,13 +79,12 @@ export default async function populateExpanded(forecast, units, current) {
     [humidity, uvIndex, dewpoint],
     ["temp-popout", "popout"]
   );
-  expdTemp.appendChild(tempPopout);
+  element.appendChild(tempPopout);
+}
 
-  clearDiv(expdPrecip);
-  // add precipitation chance
-
+async function populatePrecipitation(element) {
   await createPopoutBtn("precip-popout").then((btn) =>
-    expdPrecip.appendChild(btn)
+    element.appendChild(btn)
   );
 
   let precipitation = "Precipitation";
@@ -89,7 +101,7 @@ export default async function populateExpanded(forecast, units, current) {
     `${precipitation} chance: `
   );
 
-  expdPrecip.appendChild(precipChance);
+  element.appendChild(precipChance);
 
   // add precipitation popout
 
@@ -114,17 +126,16 @@ export default async function populateExpanded(forecast, units, current) {
     [precipFall, precipCover, snowFall, snowDepth],
     ["precip-popout", "popout"]
   );
-  expdPrecip.appendChild(precipPopout);
+  element.appendChild(precipPopout);
+}
 
-  clearDiv(expdDesc);
-  // add description
-
-  await createPopoutBtn("desc-popout").then((btn) => expdDesc.appendChild(btn));
+async function populateDescription(element) {
+  await createPopoutBtn("desc-popout").then((btn) => element.appendChild(btn));
 
   const description = document.createElement("div");
   description.textContent = forecast.description;
 
-  expdDesc.appendChild(description);
+  element.appendChild(description);
 
   // add misc popout to description
 
@@ -148,5 +159,5 @@ export default async function populateExpanded(forecast, units, current) {
     [cloudCover, sunrise, sunset, visibility, windDir, windSpd, windGst],
     ["desc-popout", "popout"]
   );
-  expdDesc.appendChild(descPopout);
+  element.appendChild(descPopout);
 }
