@@ -7,8 +7,13 @@ function addButtonBehavior(btn) {
   const dropdown = document.querySelector(`.${btn.dataset.forClass}`);
 
   btn.addEventListener("click", () => {
-    dropdown.classList.add("open");
-    document.addEventListener("click", closeOnOutsideClick);
+    if (dropdown.classList.contains("open")) {
+      dropdown.classList.remove("open");
+      document.removeEventListener("click", closeOnOutsideClick);
+    } else {
+      dropdown.classList.add("open");
+      document.addEventListener("click", closeOnOutsideClick);
+    }
   });
 
   function closeOnOutsideClick(e) {
