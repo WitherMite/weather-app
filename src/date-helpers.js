@@ -28,7 +28,7 @@ function getDayOfWeek(dateStr) {
 function createUTCDate(dateStr, timeStr) {
   const dateArr = dateStr.split("-");
   // months are 0 indexed in Date.UTC args (for some reason days arent?)
-  dateArr[1] = --dateArr[1];
+  dateArr[1]--;
   const timeArr = timeStr ? timeStr.split(":") : [];
   const dateTimeArr = [...dateArr, ...timeArr];
   return new Date(Date.UTC(...dateTimeArr));

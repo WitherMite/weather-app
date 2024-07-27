@@ -1,4 +1,4 @@
-import { getDayOfMonth, getDayOfWeek } from "./date-helpers.js";
+import { getDayOfMonth, getDayOfWeek } from "../date-helpers.js";
 import { clearDiv, createDataField, getUrl } from "./dom-helpers.js";
 
 const calendar = document.querySelector(".forecast-calendar");
