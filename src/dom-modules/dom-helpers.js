@@ -42,7 +42,7 @@ async function getUrl(path) {
 }
 
 // pre-fetch img so it isnt called every time a new button is made
-const popoutSvg = await getUrl("../src/assets/popout.svg");
+const popoutSvg = await getUrl("./src/assets/popout.svg");
 
 async function createPopoutBtn(forPopout) {
   const btn = document.createElement("button");

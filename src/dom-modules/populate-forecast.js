@@ -3,9 +3,9 @@ import { clearDiv, createDataField, getUrl } from "./dom-helpers.js";
 
 const calendar = document.querySelector(".forecast-calendar");
 const dayTemplate = document.getElementById("forecast-day-template");
-const highSvg = await getUrl("../src/assets/temperature-arrow-up.svg");
-const lowSvg = await getUrl("../src/assets/temperature-arrow-down.svg");
-const rainSvg = await getUrl("../src/assets/rain.svg");
+const highSvg = await getUrl("./src/assets/temperature-arrow-up.svg");
+const lowSvg = await getUrl("./src/assets/temperature-arrow-down.svg");
+const rainSvg = await getUrl("./src/assets/rain.svg");
 
 export default function populateForecast(forecast, units) {
   calendar.classList.add("populated");

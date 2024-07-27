@@ -1,5 +1,5 @@
 const root = document.querySelector(":root");
-const colors = await fetch("../src/weather-colors.json")
+const colors = await fetch("./src/weather-colors.json")
   .then((r) => r.json())
   .catch((e) => console.error(e));
 

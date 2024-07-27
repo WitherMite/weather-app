@@ -1,7 +1,7 @@
 import { displayStatus, hideStatus } from "./dom-modules/status-display.js";
 
 const unitKeys = ["us", "metric", "uk", "base"];
-const unitList = await fetch("../src/unit-list.json")
+const unitList = await fetch("./src/unit-list.json")
   .then((r) => r.json())
   .catch((e) => console.error(e));
 let currentUnits = unitKeys[0];
@@ -43,7 +43,7 @@ async function requestForecast(location) {
   return weather;
 }
 
-const disallowed = await fetch("../src/unneeded-props.json")
+const disallowed = await fetch("./src/unneeded-props.json")
   .then((r) => r.json())
   .catch((e) => console.error(e));
 
