@@ -9,7 +9,6 @@ const formatter = new Intl.DateTimeFormat(undefined, {
 
 function formatDate(dateStr, timeStr) {
   const date = createUTCDate(dateStr, timeStr);
-  console.log(date);
   return formatter.format(date);
 }
 
@@ -23,7 +22,6 @@ function getDayOfMonth(dateStr) {
 
 function getDayOfWeek(dateStr) {
   const date = createUTCDate(dateStr);
-  console.log(date);
   return date.getUTCDay();
 }
 
