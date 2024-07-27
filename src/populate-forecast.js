@@ -1,3 +1,4 @@
+import { getDayOfMonth, getDayOfWeek } from "./date-helpers.js";
 import { clearDiv, createDataField, getUrl } from "./dom-helpers.js";
 
 const calendar = document.querySelector(".forecast-calendar");
@@ -19,8 +20,7 @@ export default function populateForecast(forecast, units) {
     calendar.appendChild(div);
   }
 
-  const startDate = new Date(forecast[0].datetime);
-  const startDay = startDate.getUTCDay();
+  const startDay = getDayOfWeek(forecast[0].datetime);
   // remove padding spaces from array (still in DOM)
   days.splice(0, startDay);
   days.splice(forecast.length, days.length - forecast.length);
@@ -32,8 +32,7 @@ export default function populateForecast(forecast, units) {
     const forecastDay = forecast[index];
 
     const dateDiv = dayElements.querySelector(".date");
-    const date = new Date(forecastDay.datetime);
-    const dayOfMonth = date.getUTCDate();
+    const dayOfMonth = getDayOfMonth(forecastDay.datetime);
     dateDiv.textContent = dayOfMonth;
 
     const highImg = document.createElement("img");

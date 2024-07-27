@@ -1,3 +1,4 @@
+import { formatDate } from "./date-helpers.js";
 import {
   clearDiv,
   createDataField,
@@ -25,20 +26,12 @@ export default async function populateExpanded(wForecast, wUnits, wCurrent) {
   expanded.appendChild(expandedContent);
   expanded.classList.add("populated");
 
-  populateDate(expdDate);
+  expdDate.textContent = formatDate(forecast.datetime, current?.datetime);
   await populateTemperature(expdTemp);
   await populatePrecipitation(expdPrecip);
   await populateDescription(expdDesc);
 
   initDropdowns("popout-btn");
-}
-
-function populateDate(element) {
-  // TODO: fix date string, it being given in queried location's timezone is a headache...
-  const date = current
-    ? new Date(`${forecast.datetime}T${current.datetime}`)
-    : new Date(forecast.datetime);
-  element.textContent = date.toLocaleString();
 }
 
 async function populateTemperature(element) {
