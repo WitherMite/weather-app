@@ -1,0 +1,56 @@
+{
+  "snow": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  },
+  "rain": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  },
+  "fog": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  },
+  "wind": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  },
+  "cloudy": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  },
+  "partly-cloudy-day": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  },
+  "partly-cloudy-night": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  },
+  "clear-day": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  },
+  "clear-night": {
+    "primaryColor": "rgb(255, 255, 255)",
+    "secondaryColor": "rgb(185, 218, 255)",
+    "tertiaryColor": "rgb(141, 194, 255)",
+    "fontColor": "rgb(0, 0, 0)"
+  }
+}

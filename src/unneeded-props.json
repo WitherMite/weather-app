@@ -1,6 +1,5 @@
 {
   "datetimeEpoch": true,
-  "icon": true,
   "moonphase": true,
   "pressure": true,
   "solarenergy": true,

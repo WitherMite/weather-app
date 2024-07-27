@@ -1,4 +1,5 @@
 import populateExpanded from "./populate-expanded.js";
+import setWeatherStyle from "./weather-style.js";
 
 const calendar = document.querySelector(".forecast-calendar");
 
@@ -14,6 +15,11 @@ export default function initCalendar(weather) {
         const index = Number(targetData);
         const current = targetData === "0" ? weather.current : null;
         populateExpanded(weather.forecast[index], weather.units, current);
+        if (current) {
+          setWeatherStyle(current.icon);
+        } else {
+          setWeatherStyle(weather.forecast[index].icon);
+        }
         break;
       }
       target = target.parentElement;

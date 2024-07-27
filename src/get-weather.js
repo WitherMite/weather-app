@@ -18,12 +18,12 @@ export default async function getWeather(locationSearch, unitIndex) {
     const forecast = request.days.map(reduceProps);
     const units = unitList[currentUnits];
 
-    return { current, forecast, location, units };
+    return { location, current, forecast, units };
   }
 }
 
 async function requestForecast(location) {
-  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&unitGroup=${currentUnits}&include=current`;
+  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&unitGroup=${currentUnits}&iconSet=icons1&include=current`;
 
   displayStatus("Fetching weather data...");
   const weather = await fetch(url)
@@ -43,7 +43,7 @@ async function requestForecast(location) {
   return weather;
 }
 
-const disallowed = await fetch("../unneeded-props.json")
+const disallowed = await fetch("../src/unneeded-props.json")
   .then((r) => r.json())
   .catch((e) => console.error(e));
 

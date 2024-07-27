@@ -1,5 +1,6 @@
 @import url(./reset.css);
 
+/* TODO: find different sets of colors for all weather cond. */
 :root {
     --primary-color: rgb(255, 255, 255);
     --secondary-color: rgb(185, 218, 255);
