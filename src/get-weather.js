@@ -1,3 +1,5 @@
+import { displayStatus, hideStatus } from "./dom-modules/status-display.js";
+
 const unitKeys = ["us", "metric", "uk", "base"];
 const unitList = await fetch("../src/unit-list.json")
   .then((r) => r.json())
@@ -23,17 +25,22 @@ export default async function getWeather(locationSearch, unitIndex) {
 async function requestForecast(location) {
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&unitGroup=${currentUnits}&include=current`;
 
+  displayStatus("Fetching weather data...");
   const weather = await fetch(url)
     .then((response) => {
       if (!response.ok)
         throw new Error("Api request failed", { cause: response });
+      hideStatus();
       return response.json();
     })
     .catch(async (e) => {
       const cause = await e.cause?.text();
-      if (cause) console.error(cause); // TODO: display cause body to user for feedback
+      if (cause) {
+        displayStatus(cause);
+        console.error(cause);
+      }
     });
-  if (weather) return weather;
+  return weather;
 }
 
 const disallowed = await fetch("../unneeded-props.json")
