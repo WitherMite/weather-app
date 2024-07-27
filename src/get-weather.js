@@ -30,9 +30,8 @@ async function requestForecast(location) {
       return response.json();
     })
     .catch(async (e) => {
-      console.error(e);
-      const cause = await e.cause.text();
-      console.error(cause); // TODO: display cause body to user for feedback
+      const cause = await e.cause?.text();
+      if (cause) console.error(cause); // TODO: display cause body to user for feedback
     });
   if (weather) return weather;
 }
