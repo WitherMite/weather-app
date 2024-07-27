@@ -12,5 +12,5 @@ form.addEventListener("submit", (e) => {
 async function updateWeatherDisplay(location, unitIndex) {
   if (location === "") location = "london";
   const weather = await getWeather(location, unitIndex);
-  updateDisplay(weather);
+  if (weather) updateDisplay(weather);
 }

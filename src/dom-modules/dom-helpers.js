@@ -38,7 +38,7 @@ function createContainerDiv(elements, classNames) {
 async function getUrl(path) {
   return await fetch(path)
     .then((r) => r.url)
-    .catch((e) => console.log(e)); // actually handle this at some point
+    .catch((e) => console.error(e));
 }
 
 // pre-fetch img so it isnt called every time a new button is made

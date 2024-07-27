@@ -1,5 +1,7 @@
 const unitKeys = ["us", "metric", "uk", "base"];
-const unitList = await fetch("../src/unit-list.json").then((r) => r.json());
+const unitList = await fetch("../src/unit-list.json")
+  .then((r) => r.json())
+  .catch((e) => console.error(e));
 let currentUnits = unitKeys[0];
 
 export default async function getWeather(locationSearch, unitIndex) {
@@ -8,27 +10,36 @@ export default async function getWeather(locationSearch, unitIndex) {
   }
   const request = await requestForecast(locationSearch);
 
-  const location = request.resolvedAddress;
-  const current = reduceProps(request.currentConditions);
-  const forecast = request.days.map(reduceProps);
-  const units = unitList[currentUnits];
+  if (request) {
+    const location = request.resolvedAddress;
+    const current = reduceProps(request.currentConditions);
+    const forecast = request.days.map(reduceProps);
+    const units = unitList[currentUnits];
 
-  return { current, forecast, location, units };
+    return { current, forecast, location, units };
+  }
 }
 
 async function requestForecast(location) {
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=KCDTTFSSD3KMXDRP3VE6RB66K&unitGroup=${currentUnits}&include=current`;
 
-  // TODO: actually handle errors and bad responses
-  try {
-    const weather = await fetch(url).then((response) => response.json());
-    return weather;
-  } catch (e) {
-    console.log(e);
-  }
+  const weather = await fetch(url)
+    .then((response) => {
+      if (!response.ok)
+        throw new Error("Api request failed", { cause: response });
+      return response.json();
+    })
+    .catch(async (e) => {
+      console.error(e);
+      const cause = await e.cause.text();
+      console.error(cause); // TODO: display cause body to user for feedback
+    });
+  if (weather) return weather;
 }
 
-const disallowed = await fetch("../unneeded-props.json").then((r) => r.json());
+const disallowed = await fetch("../unneeded-props.json")
+  .then((r) => r.json())
+  .catch((e) => console.error(e));
 
 function reduceProps(input, index) {
   const isInIterable = !!index || index === 0;
