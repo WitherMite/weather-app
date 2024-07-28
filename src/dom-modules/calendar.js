@@ -6,7 +6,7 @@ const calendar = document.querySelector(".forecast-calendar");
 export default function initCalendar(weather) {
   calendar.addEventListener("click", expandDay);
 
-  function expandDay(e) {
+  async function expandDay(e) {
     let target = e.target;
     let targetData = target.dataset.dayIndex;
     while (true) {
@@ -14,7 +14,7 @@ export default function initCalendar(weather) {
       if (targetData || targetData === "0") {
         const index = Number(targetData);
         const current = targetData === "0" ? weather.current : null;
-        populateExpanded(weather.forecast[index], weather.units, current);
+        await populateExpanded(weather.forecast[index], weather.units, current);
         if (current) {
           setWeatherStyle(current.icon);
         } else {
