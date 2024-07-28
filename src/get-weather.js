@@ -38,7 +38,7 @@ async function requestForecast(location) {
       if (cause) {
         displayStatus(cause);
         console.error(cause);
-      }
+      } else console.error(e);
     });
   return weather;
 }
