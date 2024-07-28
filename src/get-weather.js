@@ -36,7 +36,7 @@ async function requestForecast(location) {
     .catch(async (e) => {
       const cause = await e.cause?.text();
       if (cause) {
-        displayStatus(cause);
+        displayStatus(cause, true);
         console.error(cause);
       } else console.error(e);
     });
