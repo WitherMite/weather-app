@@ -2,55 +2,64 @@
   "snow": {
     "primaryColor": "rgb(255, 255, 255)",
     "secondaryColor": "rgb(185, 218, 255)",
-    "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "tertiaryColor": "rgb(223, 246, 253)",
+    "fontColor": "rgb(0, 0, 0)",
+    "isDark": false
   },
   "rain": {
-    "primaryColor": "rgb(255, 255, 255)",
-    "secondaryColor": "rgb(185, 218, 255)",
-    "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "primaryColor": "rgb(102, 136, 175)",
+    "secondaryColor": "rgb(65, 111, 168)",
+    "tertiaryColor": "rgb(49, 85, 131)",
+    "fontColor": "rgb(255, 255, 255)",
+    "isDark": true
   },
   "fog": {
     "primaryColor": "rgb(255, 255, 255)",
-    "secondaryColor": "rgb(185, 218, 255)",
-    "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "secondaryColor": "rgb(219, 219, 219)",
+    "tertiaryColor": "rgb(165, 165, 165)",
+    "fontColor": "rgb(0, 0, 0)",
+    "isDark": false
   },
   "wind": {
     "primaryColor": "rgb(255, 255, 255)",
-    "secondaryColor": "rgb(185, 218, 255)",
-    "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "secondaryColor": "rgb(202, 215, 231)",
+    "tertiaryColor": "rgb(167, 188, 212)",
+    "fontColor": "rgb(0, 0, 0)",
+    "isDark": false
   },
   "cloudy": {
     "primaryColor": "rgb(255, 255, 255)",
-    "secondaryColor": "rgb(185, 218, 255)",
-    "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "secondaryColor": "rgb(202, 215, 231)",
+    "tertiaryColor": "rgb(167, 188, 212)",
+    "fontColor": "rgb(0, 0, 0)",
+    "isDark": false
   },
   "partly-cloudy-day": {
     "primaryColor": "rgb(255, 255, 255)",
-    "secondaryColor": "rgb(185, 218, 255)",
-    "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "secondaryColor": "rgb(177, 202, 231)",
+    "tertiaryColor": "rgb(132, 169, 212)",
+    "fontColor": "rgb(0, 0, 0)",
+    "isDark": false
   },
   "partly-cloudy-night": {
-    "primaryColor": "rgb(255, 255, 255)",
-    "secondaryColor": "rgb(185, 218, 255)",
-    "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "primaryColor": "rgb(53, 53, 53)",
+    "secondaryColor": "rgb(74, 74, 77)",
+    "tertiaryColor": "rgb(102, 106, 109)",
+    "fontColor": "rgb(255, 255, 255)",
+    "isDark": true
   },
   "clear-day": {
     "primaryColor": "rgb(255, 255, 255)",
     "secondaryColor": "rgb(185, 218, 255)",
     "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "fontColor": "rgb(0, 0, 0)",
+    "isDark": false
   },
   "clear-night": {
-    "primaryColor": "rgb(255, 255, 255)",
-    "secondaryColor": "rgb(185, 218, 255)",
-    "tertiaryColor": "rgb(141, 194, 255)",
-    "fontColor": "rgb(0, 0, 0)"
+    "primaryColor": "rgb(63, 63, 63)",
+    "secondaryColor": "rgb(88, 88, 88)",
+    "tertiaryColor": "rgb(114, 114, 114)",
+    "fontColor": "rgb(255, 255, 255)",
+    "isDark": true
   }
 }

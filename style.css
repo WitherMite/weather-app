@@ -1,6 +1,5 @@
 @import url(./reset.css);
 
-/* TODO: find different sets of colors for all weather cond. */
 :root {
     --primary-color: rgb(255, 255, 255);
     --secondary-color: rgb(185, 218, 255);
@@ -13,6 +12,7 @@ body {
         Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
         sans-serif;
     color: var(--font-color);
+    background-color: var(--primary-color);
 }
 
 /* header styling */
@@ -56,6 +56,7 @@ header button {
 
 input,
 select {
+    background-color: var(--primary-color);
     padding-left: 0.75ch;
     height: 1.75rem;
     border-radius: 6px;

@@ -38,6 +38,9 @@ export default function populateForecast(forecast, units) {
     const highImg = document.createElement("img");
     const lowImg = document.createElement("img");
     const rainImg = document.createElement("img");
+    highImg.classList.add("high");
+    lowImg.classList.add("low");
+    rainImg.classList.add("rain");
     highImg.src = highSvg;
     lowImg.src = lowSvg;
     rainImg.src = rainSvg;

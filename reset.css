@@ -8,5 +8,6 @@ input,
 select,
 button {
     font: inherit;
+    color: inherit;
     border: none;
 }
